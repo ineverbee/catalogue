@@ -1,0 +1,89 @@
+{
+	"info": {
+		"_postman_id": "52a58a69-0416-4175-8e94-842505d9f3dc",
+		"name": "catalogue",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/ping",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/ping",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"ping"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/cats?attribute={{randomAttribute}}",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var attrs = [\"name\", \"color\", \"tail_length\"];",
+							"",
+							"pm.environment.set(\"randomAttribute\", attrs[Math.floor(Math.random() * attrs.length)])"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/cats?attribute={{randomAttribute}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cats"
+					],
+					"query": [
+						{
+							"key": "attribute",
+							"value": "{{randomAttribute}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/cat",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"name\": \"{{$randomNoun}}\", \"color\": \"black\", \"tail_length\": 16, \"whiskers_length\": 11}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/cat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"cat"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
